@@ -3,119 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>my heart</title>
+    <title>Eternal Love</title>
     <style>
-        body{
+        body {
             width: 100%;
-            height: 100%;
+            height: 100vh;
             background-color: black;
             display: flex;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
             perspective: 1500px;
+            margin: 0;
+            overflow: hidden;
         }
-        #pic{
-            margin-top: 500px;
+        
+        #pic {
             width: 350px;
             height: 200px;
             display: flex;
             position: absolute;
             transform-style: preserve-3d;
             animation: action 20s linear infinite;
+            top: 30%;
         }
-        #pic:hover{
-            cursor: pointer;
+        
+        #pic:hover {
             animation-play-state: paused;
-
         }
-        #pic img:hover {
-           width: 437.5px;
-            height: 250px;
-           
-        }
-        @keyframes action{
-            from{
-                transform: rotateY(0deg);
-            }
-            to{
-                transform: rotateY(360deg);
-            }
-        }
-        #pic img{
+        
+        #pic img {
             position: absolute;
             width: 350px;
             height: 200px;
-            -webkit-box-reflect: below 15px -webkit-linear-gradient(transparent 10%,rgba(255,255,255,0.3));
+            object-fit: cover;
+            -webkit-box-reflect: below 15px -webkit-linear-gradient(transparent 10%, rgba(255,255,255,0.3));
         }
-        #pic img:nth-child(1){
-            transform: translateZ(500px);
+        
+        #pic img:hover {
+            width: 437.5px;
+            height: 250px;
         }
-        #pic img:nth-child(2){
-            transform: rotateY(60deg) translateZ(500px); 
+        
+        @keyframes action {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
         }
-         #pic img:nth-child(3){
-            transform: rotateY(120deg) translateZ(500px); 
-        }
-         #pic img:nth-child(4){
-            transform: rotateY(180deg) translateZ(500px); 
-        }
-         #pic img:nth-child(5){
-            transform: rotateY(240deg) translateZ(500px); 
-        }
-         #pic img:nth-child(6){
-            transform: rotateY(300deg) translateZ(500px); 
-        }
-         .love-container {
+        
+        #pic img:nth-child(1) { transform: translateZ(500px); }
+        #pic img:nth-child(2) { transform: rotateY(60deg) translateZ(500px); }
+        #pic img:nth-child(3) { transform: rotateY(120deg) translateZ(500px); }
+        #pic img:nth-child(4) { transform: rotateY(180deg) translateZ(500px); }
+        #pic img:nth-child(5) { transform: rotateY(240deg) translateZ(500px); }
+        #pic img:nth-child(6) { transform: rotateY(300deg) translateZ(500px); }
+        
+        .love-container {
             text-align: center;
             color: #ff0066;
+            position: absolute;
+            top: 65%;
         }
-
+        
         .heart {
             font-size: 5em;
-            animation: beat 1.3s infinite !important;
-        }
-        .heart:hover{
+            animation: beat 1.3s infinite;
             cursor: pointer;
+            transition: color 0.3s;
         }
-
+        
+        .heart.active {
+            color: #ff4d80;
+            text-shadow: 0 0 20px rgba(255, 77, 128, 0.8);
+        }
+        
         .text {
             font-size: 3em;
             margin-top: 20px;
             letter-spacing: 2px;
             text-shadow: 0 0 10px rgba(255, 0, 102, 0.5);
         }
-
+        
         @keyframes beat {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
         }
-        
+
+        /* 修复1：修改图片路径为正斜杠 */
+        .petal {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: url('玫瑰1.webp') no-repeat center/cover; /* 关键修改 */
+            animation: fall 15s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
     </style>
 </head>
 <body>
     <div id="pic">
-        <img src="86b58f3ae8f600d90c99585c380f043.jpg" alt="">
-        <img src="89b9b7556d3d4088b4d1f150c333cb1.jpg" alt="">
-        <img src="708bc291c74bd07ebbf045b402431b8.jpg" alt="">
-        <img src="2307661130f7491f19cb97d521f86fb.jpg" alt="">
-        <img src="f953c2bc8e13bf68b455540d8ca1e27.jpg" alt="">
-        <img src="ffb763397ddb5a2e2175465b595f58c.jpg" alt="">
+        <img src="86b58f3ae8f600d90c99585c380f043.jpg" alt="Love Photo 1">
+        <img src="89b9b7556d3d4088b4d1f150c333cb1.jpg" alt="Love Photo 2">
+        <img src="708bc291c74bd07ebbf045b402431b8.jpg" alt="Love Photo 3">
+        <img src="2307661130f7491f19cb97d521f86fb.jpg" alt="Love Photo 4">
+        <img src="f953c2bc8e13bf68b455540d8ca1e27.jpg" alt="Love Photo 5">
+        <img src="ffb763397ddb5a2e2175465b595f58c.jpg" alt="Love Photo 6">
     </div>
+    
     <div class="love-container">
-        <br>
-        <span class="heart"  id="playMusic">❤️</span>
+        <span class="heart" id="playMusic">❤️</span>
         <br><br>
         <div class="text">I love you endless<br><span style="font-size: 0.7em; color: #660033;">endless</span></div>
     </div>
-    <audio id="bgMusic" src="my heart go on and on.mp4" muted loop></audio>
     
-<script>
-  const audio = document.getElementById('bgMusic');
-  const playButton = document.getElementById('playMusic');
+    <audio id="bgMusic" src="502.mp4" muted loop></audio>
+    
+    <script>
+        function createPetals() {
+            for (let i = 0; i < 80; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDelay = Math.random() * 5 + 's';
+                petal.style.opacity = Math.random() * 0.5 + 0.5;
+                petal.style.width = Math.random() * 15 + 10 + 'px';
+                petal.style.height = Math.random() * 15 + 10 + 'px';
+                document.body.appendChild(petal);
+            }
+        }
 
-  playButton.addEventListener('click', () => {
-    audio.muted = false;
-    audio.play().catch(e => console.error('播放失败:', e));
-  });
-</script>
+        // 修复2：修改为函数引用（去掉括号）
+        window.onload = createPetals;  /* 关键修改 */
+
+        const audio = document.getElementById('bgMusic');
+        const playButton = document.getElementById('playMusic');
+        let isPlaying = false;
+                
+        playButton.addEventListener('click', async () => {
+            if (isPlaying) {
+                audio.pause();
+                playButton.classList.remove('active');
+                isPlaying = false;
+            } else {
+                try {
+                    audio.muted = false;
+                    await audio.play();
+                    playButton.classList.add('active');
+                    isPlaying = true;
+                } catch (e) {
+                    console.error('播放失败:', e);
+                    playButton.classList.remove('active');
+                    isPlaying = false;
+                }
+            }
+        });
+    </script>
 </body>
 </html>
