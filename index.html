@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>my heart</title>
     <style>
         body{
             width: 100%;
@@ -64,6 +64,31 @@
          #pic img:nth-child(6){
             transform: rotateY(300deg) translateZ(500px); 
         }
+         .love-container {
+            text-align: center;
+            color: #ff0066;
+        }
+
+        .heart {
+            font-size: 5em;
+            animation: beat 1.3s infinite !important;
+        }
+        .heart:hover{
+            cursor: pointer;
+        }
+
+        .text {
+            font-size: 3em;
+            margin-top: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 0, 102, 0.5);
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
     </style>
 </head>
 <body>
@@ -75,5 +100,22 @@
         <img src="f953c2bc8e13bf68b455540d8ca1e27.jpg" alt="">
         <img src="ffb763397ddb5a2e2175465b595f58c.jpg" alt="">
     </div>
+    <div class="love-container">
+        <br>
+        <span class="heart"  id="playMusic">❤️</span>
+        <br><br>
+        <div class="text">I love you endless<br><span style="font-size: 0.7em; color: #660033;">endless</span></div>
+    </div>
+    <audio id="bgMusic" src="my heart go on and on.mp4" muted loop></audio>
+    
+<script>
+  const audio = document.getElementById('bgMusic');
+  const playButton = document.getElementById('playMusic');
+
+  playButton.addEventListener('click', () => {
+    audio.muted = false;
+    audio.play().catch(e => console.error('播放失败:', e));
+  });
+</script>
 </body>
 </html>
